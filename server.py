@@ -7,16 +7,11 @@ app = Flask(__name__)
 def emotion_detector_route():
     text_to_analyze = request.args.get('textToAnalyze')
     
-    if not text_to_analyze or text_to_analyze.strip() == "":
-        return "Please provide text to analyze", 400
-    
     result = emotion_detector(text_to_analyze)
     
-    if result is None:
-        return "Error processing the text", 400
-    
-    if result['dominant_emotion'] is None:
-        return "Please provide text to analyze", 400
+    # Check if result is None or dominant_emotion is None (blank/invalid entry)
+    if result is None or result['dominant_emotion'] is None:
+        return "Invalid text! Please try again!", 400
     
     # Format the response as requested
     anger = result['anger']
