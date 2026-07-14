@@ -40,3 +40,6 @@ def emotion_detector(text_to_analyze):
         }
     else:
         return None
+        
+if result is None or result['dominant_emotion'] is None:
+    return "Invalid text! Please try again!", 400
